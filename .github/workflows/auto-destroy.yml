@@ -1,5 +1,8 @@
 name: Auto Terraform Destroy
 
+permissions:
+  contents: read
+  
 on:
   schedule:
     - cron: "0 20 * * *"    # run every day at 20:00 UTC
