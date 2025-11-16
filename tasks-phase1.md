@@ -171,8 +171,8 @@ OPTIONS (
 
     ***why does ORC not require a table schema?***
 
- ```   ORC files store the full schema (column names, types, metadata) inside the file footer.
-Because the schema is embedded in the ORC file itself, BigQuery can automatically detect it and does not require you to define the table schema manually when creating an external table.```
+ORC files store the full schema (column names, types, metadata) inside the file footer.
+Because the schema is embedded in the ORC file itself, BigQuery can automatically detect it and does not require you to define the table schema manually when creating an external table.
 
 13. Find and correct the error in spark-job.py
 
