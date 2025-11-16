@@ -140,7 +140,8 @@ resource_usage:
       south_america: 0
       oceania: 0
       worldwide: 0
-      ```
+```
+
    ***place the screenshot from infracost output here***
 
    I tried few different Infracost files so thats why the sum is 12$ instead of 3$
