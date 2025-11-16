@@ -24,16 +24,16 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 6. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
 
     ***describe one selected module and put the output of terraform graph for this module here***
-```
+
 The Composer module provisions a fully managed Cloud Composer (Apache Airflow) environment on Google Cloud that enables you to create, schedule, monitor, and manage workflow pipelines (DAGs) with no infrastructure-management overhead. It automatically creates a GKE cluster for Airflow components (schedulers, workers, triggerers), a Cloud SQL database for Airflow metadata, and an environment-specific Cloud Storage bucket that stores DAGs, plugins, logs, and data. The module configures associated service accounts, IAM roles, networking (including VPC/subnet integration and optional Private IP setups), and monitoring/logging integrations. By using this module, you get a production-ready Airflow environment including compute, storage, networking and orchestration, fully managed and integrated into your Google Cloud project.
-```
+
 **variables:**
 
 env_name, project_name, region, network, subnet_address, subnet_name, image_version, env_size, env_variables
   
 **outputs:**
 ```
-   output "gcs_bucket" {
+output "gcs_bucket" {
   description = "GCS bucket for storing Apache Airflow DAGs"
   value       = module.composer.gcs_bucket
 }
@@ -47,7 +47,7 @@ output "gke_cluster" {
   description = "Composer underlying GKE cluster"
   value       = module.composer.gke_cluster
 }
-   ```
+```
 **graph generated from modules/composer:**
    <img width="2436" height="291" alt="composer-graph" src="https://github.com/user-attachments/assets/c3a6a3f0-818b-4d54-a981-c41c89e44db6" />
 
@@ -149,13 +149,16 @@ resource_usage:
 11. Create a BigQuery dataset and an external table using SQL
     
     ***place the code and output here***
-    ```
+```
     CREATE SCHEMA `tbd-2025z-318326.tbd_zmp_dataset`
     OPTIONS (
       location = "europe-west1"
     );
 ```
-    <img width="647" height="134" alt="image" src="https://github.com/user-attachments/assets/9e7551e5-11e9-4fa0-b861-54e7600f68cc" />
+
+<img width="647" height="134" alt="image" src="https://github.com/user-attachments/assets/9e7551e5-11e9-4fa0-b861-54e7600f68cc" />
+
+    
 ```
 CREATE OR REPLACE EXTERNAL TABLE `tbd-2025z-318326.tbd_zmp_dataset.external_orc_table`
 OPTIONS (
@@ -173,7 +176,8 @@ Because the schema is embedded in the ORC file itself, BigQuery can automaticall
 13. Find and correct the error in spark-job.py
 
     ***describe the cause and how to find the error***
-I went to Dataproc → Jobs → Job that failed → Investigated job details
+I went to Dataproc → Jobs → Job that failed → Investigated job details and found:
+
 ```
 py4j.protocol.Py4JJavaError: An error occurred while calling o96.orc.
 : com.google.cloud.hadoop.repackaged.gcs.com.google.api.client.googleapis.json.GoogleJsonResponseException: 404 Not Found
@@ -192,11 +196,13 @@ POST https://storage.googleapis.com/upload/storage/v1/b/tbd-2025z-9901-data/o?if
 ```
 
 Changed data bucket to:
+
 ```
 DATA_BUCKET = "gs://tbd-2025z-318326-data/data/shakespeare/"
 ```
 
 rerun job by cloning it and now it worked:
+
 <img width="1230" height="243" alt="image" src="https://github.com/user-attachments/assets/342c5281-3d6b-4ac3-99a1-1992bdd950dc" />
 
 
