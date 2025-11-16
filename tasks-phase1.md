@@ -67,10 +67,41 @@ gcloud compute ssh tbd-cluster-m \
 10. Draw an architecture diagram (e.g. in draw.io) that includes:
     1. Description of the components of service accounts
     2. List of buckets for disposal
-    
-    ***place your diagram here***
 
-11. Create a new PR and add costs by entering the expected consumption into Infracost
+        1. tbd-2025z-318326-lab@tbd-2025z-318326.iam.gserviceaccount.com
+        
+        Lab / workshop service account.
+        
+        2. tbd-2025z-318326-data@tbd-2025z-318326.iam.gserviceaccount.com
+        
+        Data pipeline / DAG service account. Used for accessing buckets like: tbd-2025z-318326-data, tbd-2025z-318326-code
+        
+        3. 1094786992778-compute@developer.gserviceaccount.com
+        
+        Default Compute Engine SA. GCP creates this automatically. Used when any VM or Dataproc node does not specify a custom service account.
+        
+        4. tbd-2025z-318326-dataproc-sa@tbd-2025z-318326.iam.gserviceaccount.com
+        
+        Dataproc cluster service account. Has permissions to: read/write Dataproc staging bucket, read/write Dataproc temp bucket, interact with BigQuery, read data bucket
+        
+        Buckets are:
+        
+        tbd-2025z-318326-code
+        
+        tbd-2025z-318326-data
+        
+        tbd-2025z-318326-dataproc-staging
+        
+        tbd-2025z-318326-dataproc-temp
+        
+        tbd-2025z-318326-state
+    
+        ***place your diagram here***
+
+       <img width="634" height="623" alt="image" src="https://github.com/user-attachments/assets/75f052f9-1ff7-4c54-92cf-5842c2b34a71" />
+
+
+10. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry`, `google_storage_bucket`, `google_service_networking_connection`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml) 
 
